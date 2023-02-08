@@ -5,11 +5,6 @@ let gameInProgress = true;
 let computerWins = 0;
 let playerWins = 0;
 
-// Get computer selection
-const computerPlay = () => OPTIONS_ARR[Math.floor(Math.random() * 3)];
-// Get player selection
-const userPlay = () => prompt(messenger('prompt', {round}), "");
-
 // Start the game
 (function () {
     if(confirm(messenger('alertStart'))) {
@@ -32,8 +27,8 @@ function game() {
 
 // Play one round
 function playRound() {
-    const playerSelection = userPlay()
-    const computerSelection = computerPlay()
+    const playerSelection = prompt(messenger('prompt', {round}), "");
+    const computerSelection = OPTIONS_ARR[Math.floor(Math.random() * 3)];
 
     if (!playerInputListener(playerSelection)) {
         game()
