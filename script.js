@@ -87,8 +87,11 @@ function playerInputListener(playerSelection) {
         if (escapeTheGame()) gameInProgress = false;
         return false;
     }
-
-    playerSelection = playerSelection.trim().toLowerCase()
+    playerSelection = playerSelection.trim()
+    if (playerSelection == "") {
+        console.log(messenger('notValid'))
+    }
+    playerSelection = playerSelection.toLowerCase()
     if (!OPTIONS_ARR.includes(playerSelection)) {
         console.log(messenger('undefined'))
         return false;
@@ -131,6 +134,8 @@ function messenger(action, args) {
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
+        case 'notValid':
+            return 'You didn\'t type anything Please enter smth';
 
         case 'gameWin':
             return `Game result is a Win! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
