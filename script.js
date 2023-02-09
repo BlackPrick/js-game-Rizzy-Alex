@@ -17,7 +17,7 @@ const userPlay = () => prompt(messenger('prompt', {round}), "");
         game()
     }
     else {
-        alert('Just come back anytime')
+        console.log(messenger('dontWannaPlay'))
     }
 })()
 
@@ -112,6 +112,7 @@ function escapeTheGame() {
 // All game output messages
 function messenger(action, args) {
     switch (action) {
+        
         case 'alertStart':
             return 'This is console "Rock, Paper or Scissors" game.\nTo start press "OK" and open devtools console.'
 
@@ -132,6 +133,9 @@ function messenger(action, args) {
 
         case 'escInfo':
             return `You escaped the game after round ${round}. To restart the game please refresh the page.`
+
+        case 'dontWannaPlay':
+            return 'Come back later anytime! To start the game just reload the page or press ENTER'
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
