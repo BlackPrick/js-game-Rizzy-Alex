@@ -135,7 +135,7 @@ function messenger(action, args) {
             return `You escaped the game after round ${round}. To restart the game please refresh the page.`
 
         case 'dontWannaPlay':
-            return 'Come back later anytime! To start the game just reload the page'
+            return 'Come back later anytime! To start the game just reload the page or press ENTER'
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
