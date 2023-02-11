@@ -12,7 +12,7 @@ let playerWins = 0;
         game()
     }
     else {
-        alert('Just come back anytime')
+        alert(messenger('dontWannaPlay'))
         gameInProgress = false;
         console.log(messenger('restart'))
     }
@@ -86,8 +86,12 @@ function playerInputListener(playerSelection) {
         if (escapeTheGame()) gameInProgress = false;
         return false;
     }
-
-    playerSelection = playerSelection.trim().toLowerCase()
+    playerSelection = playerSelection.trim();
+    if (playerSelection == "") {
+        console.log(messenger('notValid'))
+        return false;
+    }
+    playerSelection = playerSelection.toLowerCase();
     if (!OPTIONS_ARR.includes(playerSelection)) {
         console.log(messenger('undefined'))
         return false;
@@ -108,6 +112,7 @@ function escapeTheGame() {
 // All game output messages
 function messenger(action, args) {
     switch (action) {
+        
         case 'alertStart':
             return 'This is console "Rock, Paper or Scissors" game.\nTo start press "OK" and open devtools console.'
 
@@ -129,8 +134,14 @@ function messenger(action, args) {
         case 'escInfo':
             return `You escaped the game after round ${round}. To restart the game please refresh the page.`
 
+        case 'dontWannaPlay':
+            return 'Come back later anytime! To start the game just reload the page or press ENTER'
+
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
+        
+        case 'notValid':
+            return 'You didn\'t type anything Please enter smth';
 
         case 'gameWin':
             return `Game result is a Win! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
