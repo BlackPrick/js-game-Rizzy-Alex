@@ -5,19 +5,16 @@ let gameInProgress = true;
 let computerWins = 0;
 let playerWins = 0;
 
-// Get computer selection
-const computerPlay = () => OPTIONS_ARR[Math.floor(Math.random() * 3)];
-// Get player selection
-const userPlay = () => prompt(messenger('prompt', {round}), "");
-
 // Start the game
 (function () {
-    if(confirm(messenger('alertStart'))) {
+    if (confirm(messenger('alertStart'))) {
         console.log(messenger('rules'))
         game()
     }
     else {
         alert(messenger('dontWannaPlay'))
+        gameInProgress = false;
+        console.log(messenger('restart'))
     }
 })()
 
@@ -32,8 +29,8 @@ function game() {
 
 // Play one round
 function playRound() {
-    const playerSelection = userPlay()
-    const computerSelection = computerPlay()
+    const playerSelection = prompt(messenger('prompt', { round }), "");
+    const computerSelection = OPTIONS_ARR[Math.floor(Math.random() * 3)];
 
     if (!playerInputListener(playerSelection)) {
         game()
@@ -79,6 +76,8 @@ function determineGameWinner() {
     else {
         console.log(messenger('gameDraw'))
     }
+    gameInProgress = false;
+    console.log(messenger('restart'))
 }
 
 // Player input listener
@@ -104,6 +103,7 @@ function playerInputListener(playerSelection) {
 function escapeTheGame() {
     if (confirm(messenger('escAlert'))) {
         console.log(messenger('escInfo'))
+        console.log(messenger('restart'))
         return true;
     }
     else return false;
@@ -152,6 +152,8 @@ function messenger(action, args) {
         case 'gameDraw':
             return `Game result is a Draw! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
 
+        case 'restart':
+            return `To restart the game please press ENTER.`;
 
         case 'rules':
             let message = "Game information:\n";
@@ -166,3 +168,16 @@ function messenger(action, args) {
             return message;
     }
 }
+
+// Restart the game
+document.querySelector('body').addEventListener("keypress", function (e) {
+    if (gameInProgress === false && e.key === "Enter") {
+        e.preventDefault();
+        gameInProgress = true;
+        round = 1;
+        computerWins = 0;
+        playerWins = 0;
+        
+        game()
+    }
+});
