@@ -4,9 +4,17 @@ let round = 1;
 let gameInProgress = true;
 let computerWins = 0;
 let playerWins = 0;
+let isFirstLoad = (!localStorage.getItem('firstLoad')) ? true : false;
+
+if (isFirstLoad) {
+    localStorage.setItem('firstLoad', '1');
+    document.location.reload()
+}else {
+    startTheGame()
+}
 
 // Start the game
-(function () {
+function startTheGame() {
     if (confirm(messenger('alertStart'))) {
         console.log(messenger('rules'))
         game()
@@ -16,7 +24,7 @@ let playerWins = 0;
         gameInProgress = false;
         console.log(messenger('restart'))
     }
-})()
+}
 
 // Run the game
 function game() {
@@ -114,7 +122,7 @@ function escapeTheGame() {
 // All game output messages
 function messenger(action, args) {
     switch (action) {
-        
+
         case 'alertStart':
             return 'This is console "Rock, Paper or Scissors" game.\nTo start press "OK" and open devtools console.'
 
@@ -141,9 +149,9 @@ function messenger(action, args) {
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
-        
+
         case 'empty':
-            return `You didn't type anything Please enter smth`;
+            return `You didn't type anything. Please enter something.`;
 
         case 'gameWin':
             return `Game result is a Win! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
@@ -179,7 +187,7 @@ document.querySelector('body').addEventListener("keypress", function (e) {
         round = 1;
         computerWins = 0;
         playerWins = 0;
-        
+
         game()
     }
 });
