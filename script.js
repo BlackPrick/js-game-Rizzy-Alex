@@ -12,7 +12,7 @@ let playerWins = 0;
         game()
     }
     else {
-        alert(messenger('dontWannaPlay'))
+        alert(messenger('goodbye'))
         gameInProgress = false;
         console.log(messenger('restart'))
     }
@@ -86,11 +86,13 @@ function playerInputListener(playerSelection) {
         if (escapeTheGame()) gameInProgress = false;
         return false;
     }
+
     playerSelection = playerSelection.trim();
-    if (playerSelection == "") {
-        console.log(messenger('notValid'))
+    if (playerSelection === "") {
+        console.log(messenger('empty'))
         return false;
     }
+
     playerSelection = playerSelection.toLowerCase();
     if (!OPTIONS_ARR.includes(playerSelection)) {
         console.log(messenger('undefined'))
@@ -134,14 +136,14 @@ function messenger(action, args) {
         case 'escInfo':
             return `You escaped the game after round ${round}. To restart the game please refresh the page.`
 
-        case 'dontWannaPlay':
+        case 'goodbye':
             return 'Come back later anytime! To start the game just reload the page or press ENTER'
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
         
-        case 'notValid':
-            return 'You didn\'t type anything Please enter smth';
+        case 'empty':
+            return `You didn't type anything Please enter smth`;
 
         case 'gameWin':
             return `Game result is a Win! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
