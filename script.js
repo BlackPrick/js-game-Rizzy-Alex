@@ -6,6 +6,7 @@ let computerWins = 0;
 let playerWins = 0;
 let isFirstLoad = (!localStorage.getItem('firstLoad')) ? true : false;
 
+// Restart the game after first load to avoid missing console.log
 if (isFirstLoad) {
     localStorage.setItem('firstLoad', '1');
     document.location.reload()
