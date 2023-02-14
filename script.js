@@ -29,7 +29,7 @@ function game() {
 
 // Play one round
 function playRound() {
-    const playerSelection = prompt(messenger('prompt', { round }), "");
+    let playerSelection = prompt(messenger('prompt', { round }), "");
     const computerSelection = OPTIONS_ARR[Math.floor(Math.random() * 3)];
 
     let testSelection = playerInputListener(playerSelection)
