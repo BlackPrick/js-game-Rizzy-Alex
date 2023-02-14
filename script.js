@@ -32,10 +32,12 @@ function playRound() {
     const playerSelection = prompt(messenger('prompt', { round }), "");
     const computerSelection = OPTIONS_ARR[Math.floor(Math.random() * 3)];
 
-    if (!playerInputListener(playerSelection)) {
+    let testSelection = playerInputListener(playerSelection)
+    if (testSelection === "") {
         game()
         return;
     }
+    else playerSelection = testSelection
     console.log(`ROUND ${round}`)
     round++;
 
@@ -84,21 +86,21 @@ function determineGameWinner() {
 function playerInputListener(playerSelection) {
     if (playerSelection == null) {
         if (escapeTheGame()) gameInProgress = false;
-        return false;
+        return "";
     }
 
     playerSelection = playerSelection.trim();
     if (playerSelection === "") {
         console.log(messenger('empty'))
-        return false;
+        return "";
     }
 
     playerSelection = playerSelection.toLowerCase();
     if (!OPTIONS_ARR.includes(playerSelection)) {
         console.log(messenger('undefined'))
-        return false;
+        return "";
     }
-    else return true;
+    else return playerSelection;
 }
 
 // Escape the game alert
