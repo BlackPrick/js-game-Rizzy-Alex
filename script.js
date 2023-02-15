@@ -134,13 +134,13 @@ function messenger(action, args) {
             return `You escaped the game after round ${round}. To start the game please refresh the page.`
 
         case 'goodbye':
-            return 'Come back later anytime! To restart the game just reload the page or press ENTER'
+            return 'Come back later anytime! To restart the game just reload the page or click anywhere on the page.'
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
 
         case 'empty':
-            return `You didn't type anything Please enter smth`;
+            return `You didn't type anythin. Please enter an option.`;
 
         case 'gameWin':
             return `Game result is a Win! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
@@ -152,7 +152,7 @@ function messenger(action, args) {
             return `Game result is a Draw! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
 
         case 'start':
-            return `To start the game please press ENTER.`;
+            return `To start the game please click anywhere on the page.`;
 
         case 'rules':
             let message = "Game information:\n";
@@ -168,9 +168,8 @@ function messenger(action, args) {
     }
 }
 
-// start the game
-document.querySelector('body').addEventListener("keypress", function (e) {
-    if (gameInProgress === false && e.key === "Enter") {
+window.addEventListener("click", function (e) {
+    if (gameInProgress === false) {
         e.preventDefault();
         gameInProgress = true;
         round = 1;
