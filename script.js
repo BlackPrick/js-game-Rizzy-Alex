@@ -1,21 +1,15 @@
 const OPTIONS_ARR = ["rock", "paper", "scissors"];
 
 let round = 1;
-let gameInProgress = true;
+let gameInProgress = false;
 let computerWins = 0;
 let playerWins = 0;
 
 // Start the game
 (function () {
-    if (confirm(messenger('alertStart'))) {
-        console.log(messenger('rules'))
-        game()
-    }
-    else {
-        alert(messenger('goodbye'))
-        gameInProgress = false;
-        console.log(messenger('restart'))
-    }
+    alert(messenger('alertStart'))
+    console.log(messenger('rules'))
+    console.log(messenger('start'))
 })()
 
 // Run the game
@@ -79,7 +73,7 @@ function determineGameWinner() {
         console.log(messenger('gameDraw'))
     }
     gameInProgress = false;
-    console.log(messenger('restart'))
+    console.log(messenger('start'))
 }
 
 // Player input listener
@@ -106,8 +100,9 @@ function playerInputListener(playerSelection) {
 // Escape the game alert
 function escapeTheGame() {
     if (confirm(messenger('escAlert'))) {
+        alert(messenger('goodbye'))
         console.log(messenger('escInfo'))
-        console.log(messenger('restart'))
+        console.log(messenger('start'))
         return true;
     }
     else return false;
@@ -116,9 +111,9 @@ function escapeTheGame() {
 // All game output messages
 function messenger(action, args) {
     switch (action) {
-        
+
         case 'alertStart':
-            return 'This is console "Rock, Paper or Scissors" game.\nTo start press "OK" and open devtools console.'
+            return 'This is console "Rock, Paper or Scissors" game.\nOpen devtools console, please.'
 
         case 'prompt':
             return `ROUND ${args.round}.\nPlease select Rock, Paper or Scissors.`;
@@ -136,14 +131,14 @@ function messenger(action, args) {
             return 'Do you want to escape the game?';
 
         case 'escInfo':
-            return `You escaped the game after round ${round}. To restart the game please refresh the page.`
+            return `You escaped the game after round ${round}. To start the game please refresh the page.`
 
         case 'goodbye':
-            return 'Come back later anytime! To start the game just reload the page or press ENTER'
+            return 'Come back later anytime! To restart the game just reload the page or press ENTER'
 
         case 'undefined':
             return 'You entered an undefined option :( Try again. Available options: Rock or Paper or Scissors';
-        
+
         case 'empty':
             return `You didn't type anything Please enter smth`;
 
@@ -156,8 +151,8 @@ function messenger(action, args) {
         case 'gameDraw':
             return `Game result is a Draw! Your score: ${playerWins} wins. Computer's score: ${computerWins} wins.`;
 
-        case 'restart':
-            return `To restart the game please press ENTER.`;
+        case 'start':
+            return `To start the game please press ENTER.`;
 
         case 'rules':
             let message = "Game information:\n";
@@ -173,7 +168,7 @@ function messenger(action, args) {
     }
 }
 
-// Restart the game
+// start the game
 document.querySelector('body').addEventListener("keypress", function (e) {
     if (gameInProgress === false && e.key === "Enter") {
         e.preventDefault();
@@ -181,7 +176,7 @@ document.querySelector('body').addEventListener("keypress", function (e) {
         round = 1;
         computerWins = 0;
         playerWins = 0;
-        
+
         game()
     }
 });
